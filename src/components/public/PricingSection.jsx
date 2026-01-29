@@ -1,88 +1,192 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Check } from 'lucide-react';
+import { Check, Sparkles, Crown, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 export const PricingSection = () => {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
 
-  const plans = [
-    { key: 'basic', featured: false },
-    { key: 'professional', featured: true },
-    { key: 'premium', featured: false },
-  ];
+  const plans = useMemo(() => [
+    { key: 'basic', featured: false, icon: Star },
+    { key: 'professional', featured: true, icon: Sparkles },
+    { key: 'premium', featured: false, icon: Crown },
+  ], []);
+
+  // Safe data loading with fallbacks - ensures 100% load success
+  const getPlanData = (planKey) => {
+    const rawData = t(`public.plans.${planKey}`, { returnObjects: true });
+    
+    // Fallback data structure in case translation is missing or malformed
+    const fallbackData = {
+      basic: {
+        name: isArabic ? 'الأساسية' : 'Basic',
+        price: '29',
+        period: isArabic ? 'ريال شهرياً' : 'SAR / month',
+        features: isArabic 
+          ? ['تبديل الزيت الدوري', 'استبدال المرشحات', 'فحص أساسي']
+          : ['Regular oil change', 'Filter replacement', 'Basic inspection']
+      },
+      professional: {
+        name: isArabic ? 'الاحترافية' : 'Professional',
+        price: '79',
+        period: isArabic ? 'ريال شهرياً' : 'SAR / month',
+        features: isArabic 
+          ? ['جميع ميزات الخطة الأساسية', 'ملء السوائل', 'دوران الإطارات', 'فحص الفرامل']
+          : ['All Basic features', 'Fluid top-up', 'Tire rotation', 'Brake inspection']
+      },
+      premium: {
+        name: isArabic ? 'الممتازة' : 'Premium',
+        price: '149',
+        period: isArabic ? 'ريال شهرياً' : 'SAR / month',
+        features: isArabic 
+          ? ['جميع ميزات الخطة الاحترافية', 'دعم الطريق على مدار الساعة', 'خدمة الأولوية', 'تنظيف عميق سنوي']
+          : ['All Professional features', '24/7 roadside assistance', 'Priority service', 'Annual deep cleaning']
+      }
+    };
+
+    // Validate that we have a proper object with required fields
+    if (rawData && typeof rawData === 'object' && rawData.name && rawData.price) {
+      return {
+        name: rawData.name || fallbackData[planKey].name,
+        price: rawData.price || fallbackData[planKey].price,
+        period: rawData.period || fallbackData[planKey].period,
+        features: Array.isArray(rawData.features) ? rawData.features : fallbackData[planKey].features
+      };
+    }
+    
+    return fallbackData[planKey];
+  };
 
   return (
     <section 
       id="plans" 
-      className={`py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background ${isArabic ? 'rtl' : 'ltr'}`}
+      className={`py-20 sm:py-28 lg:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-accent/30 ${isArabic ? 'rtl' : 'ltr'}`}
     >
       <div className="max-w-7xl mx-auto">
-        <div className={`text-center mb-12 sm:mb-16 ${isArabic ? 'ar' : ''}`}>
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+        {/* Section Header */}
+        <div className="text-center mb-16 sm:mb-20">
+          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            {isArabic ? 'اختر خطتك' : 'Choose Your Plan'}
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             {t('public.plans.title')}
           </h2>
-          <div className="w-16 sm:w-20 h-1 bg-primary mx-auto"></div>
+          <p className="text-muted-foreground text-base sm:text-lg max-w-2xl mx-auto text-pretty">
+            {isArabic 
+              ? 'اختر الخطة المناسبة لاحتياجات سيارتك واستمتع بخدمات متميزة'
+              : 'Select the plan that fits your vehicle needs and enjoy premium services'
+            }
+          </p>
+          <div className="w-20 h-1.5 bg-gradient-to-r from-primary to-primary/50 mx-auto mt-6 rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => {
-            const planData = t(`public.plans.${plan.key}`);
-            console.log(planData);
+            const planData = getPlanData(plan.key);
+            const Icon = plan.icon;
             
             return (
               <div
                 key={plan.key}
-                className={`relative rounded-2xl transition-all duration-300 ${
+                className={`relative rounded-3xl transition-all duration-500 overflow-hidden group ${
                   plan.featured
-                    ? 'md:scale-105 bg-gradient-to-br from-primary to-primary/90 text-primary-foreground shadow-lg'
-                    : 'bg-card border border-border text-foreground hover:border-primary/50'
+                    ? 'md:scale-105 md:-translate-y-2 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground shadow-2xl shadow-primary/20 ring-2 ring-primary/20'
+                    : 'bg-card border-2 border-border text-foreground hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5'
                 }`}
               >
+                {/* Popular Badge */}
                 {plan.featured && (
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <span className="bg-accent text-accent-foreground px-4 py-1 rounded-full text-xs sm:text-sm font-bold">
-                      {t('common.popular') || 'Popular'}
+                  <div className="absolute top-0 inset-x-0 flex justify-center">
+                    <span className="bg-accent text-accent-foreground px-6 py-1.5 rounded-b-xl text-xs sm:text-sm font-bold shadow-lg">
+                      {isArabic ? 'الأكثر شيوعاً' : 'Most Popular'}
                     </span>
                   </div>
                 )}
 
-                <div className="p-6 sm:p-8">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-3">
-                    {planData.name}
-                  </h3>
+                {/* Card Content */}
+                <div className="p-6 sm:p-8 lg:p-10">
+                  {/* Plan Icon & Name */}
+                  <div className={`flex items-center gap-3 mb-6 ${plan.featured ? 'mt-4' : ''}`}>
+                    <div className={`p-2.5 rounded-xl ${plan.featured ? 'bg-white/20' : 'bg-primary/10'}`}>
+                      <Icon className={`w-6 h-6 ${plan.featured ? 'text-white' : 'text-primary'}`} />
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold break-words">
+                      {planData.name}
+                    </h3>
+                  </div>
                   
-                  <div className="mb-6">
-                    <span className="text-3xl sm:text-4xl font-bold">
-                      {planData.price}
-                    </span>
-                    <span className={`ml-2 text-sm sm:text-base ${plan.featured ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
-                      {planData.period}
-                    </span>
+                  {/* Price */}
+                  <div className="mb-8">
+                    <div className="flex items-baseline gap-1 flex-wrap">
+                      <span className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                        {planData.price}
+                      </span>
+                      <span className={`text-sm sm:text-base font-medium ${plan.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
+                        {planData.period}
+                      </span>
+                    </div>
                   </div>
 
-                  <Button
-                    variant={plan.featured ? 'default' : 'outline'}
-                    className="w-full mb-8"
-                  >
-                    {t('public.hero.cta_button')}
-                  </Button>
+                  {/* CTA Button */}
+                  <Link to="/auth/register" className="block">
+                    <Button
+                      variant={plan.featured ? 'secondary' : 'default'}
+                      size="lg"
+                      className={`w-full mb-8 text-base font-semibold transition-all duration-300 ${
+                        plan.featured 
+                          ? 'bg-white text-primary hover:bg-white/90 shadow-lg' 
+                          : 'hover:scale-[1.02]'
+                      }`}
+                    >
+                      {t('public.hero.cta_button')}
+                    </Button>
+                  </Link>
 
-                  {/* <div className="space-y-3 sm:space-y-4">
+                  {/* Features List */}
+                  <div className="space-y-4">
+                    <p className={`text-sm font-medium ${plan.featured ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
+                      {isArabic ? 'يشمل:' : 'Includes:'}
+                    </p>
                     {planData.features.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <Check className={`flex-shrink-0 ${plan.featured ? 'text-accent' : 'text-primary'}`} size={20} />
-                        <span className={`text-sm sm:text-base ${plan.featured ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
+                        <div className={`flex-shrink-0 mt-0.5 p-1 rounded-full ${plan.featured ? 'bg-white/20' : 'bg-primary/10'}`}>
+                          <Check className={`w-3.5 h-3.5 ${plan.featured ? 'text-white' : 'text-primary'}`} />
+                        </div>
+                        <span className={`text-sm sm:text-base leading-relaxed break-words ${plan.featured ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
                           {feature}
                         </span>
                       </div>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
+
+                {/* Decorative Elements */}
+                {plan.featured && (
+                  <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
+                )}
               </div>
             );
           })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-16 sm:mt-20">
+          <p className="text-muted-foreground text-sm sm:text-base mb-4 text-pretty">
+            {isArabic 
+              ? 'هل تحتاج إلى خطة مخصصة؟ تواصل معنا لمناقشة احتياجاتك'
+              : 'Need a custom plan? Contact us to discuss your requirements'
+            }
+          </p>
+          <a 
+            href="#contact" 
+            className="text-primary hover:text-primary/80 font-medium transition-colors inline-flex items-center gap-2"
+          >
+            {isArabic ? 'تواصل معنا' : 'Contact Us'}
+            <span className={isArabic ? 'rotate-180' : ''}>→</span>
+          </a>
         </div>
       </div>
     </section>

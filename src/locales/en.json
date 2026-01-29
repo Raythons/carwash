@@ -115,10 +115,35 @@
             }
         },
         "plans": {
-            "title": "Plans",
-            "basic": "Basic",
-            "professional": "Professional",
-            "premium": "Premium"
+            "title": "Subscription Plans",
+            "basic": {
+                "name": "Basic",
+                "price": "29",
+                "period": "SAR / month",
+                "features": ["Regular oil change", "Filter replacement", "Basic inspection"]
+            },
+            "professional": {
+                "name": "Professional",
+                "price": "79",
+                "period": "SAR / month",
+                "features": ["All Basic features", "Fluid top-up", "Tire rotation", "Brake inspection"]
+            },
+            "premium": {
+                "name": "Premium",
+                "price": "149",
+                "period": "SAR / month",
+                "features": ["All Professional features", "24/7 roadside assistance", "Priority service", "Annual deep cleaning"]
+            }
+        },
+        "extras": {
+            "title": "Additional Services",
+            "available": "Choose from our wide range of additional services",
+            "service1": "Wheel Alignment",
+            "service2": "Battery Replacement",
+            "service3": "AC Service",
+            "service4": "Paint Protection",
+            "service5": "Interior Detailing",
+            "service6": "Engine Cleaning"
         },
         "contact": {
             "title": "Contact Us",

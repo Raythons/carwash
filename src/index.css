@@ -1,40 +1,66 @@
 @import "tailwindcss";
 
-/* Custom Tailwind Theme */
+/* ==========================================
+   AutoCare Premium Theme - Modern Car Wash
+   ========================================== */
+
 @theme {
+  /* Primary Brand Color - Cyan/Aqua (water, cleanliness) */
   --color-primary: #00D9FF;
   --color-primary-foreground: #ffffff;
-  --color-secondary: #64748b;
-  --color-secondary-foreground: #ffffff;
+  
+  /* Secondary Color - Sophisticated Slate (replaces black) */
+  --color-secondary: #1e293b;
+  --color-secondary-foreground: #f8fafc;
+  
+  /* Background & Surface Colors */
   --color-background: #ffffff;
-  --color-foreground: #171717;
-  --color-border: #e5e5e5;
-  --color-input: #f5f5f5;
+  --color-foreground: #1e293b;
+  
+  /* Border & Input */
+  --color-border: #e2e8f0;
+  --color-input: #f8fafc;
   --color-ring: #00D9FF;
+  
+  /* Destructive */
   --color-destructive: #ef4444;
   --color-destructive-foreground: #ffffff;
-  --color-muted: #e5e5e5;
-  --color-muted-foreground: #737373;
-  --color-accent: #00D9FF;
-  --color-accent-foreground: #ffffff;
+  
+  /* Muted */
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  
+  /* Accent - Subtle cyan tint */
+  --color-accent: #ecfeff;
+  --color-accent-foreground: #0891b2;
+  
+  /* Card */
   --color-card: #ffffff;
-  --color-card-foreground: #171717;
+  --color-card-foreground: #1e293b;
+  
+  /* Popover */
   --color-popover: #ffffff;
-  --color-popover-foreground: #171717;
-  --color-chart-1: #f97316;
+  --color-popover-foreground: #1e293b;
+  
+  /* Charts */
+  --color-chart-1: #00D9FF;
   --color-chart-2: #14b8a6;
   --color-chart-3: #3b82f6;
-  --color-chart-4: #eab308;
-  --color-chart-5: #f59e0b;
+  --color-chart-4: #f59e0b;
+  --color-chart-5: #8b5cf6;
+  
+  /* Sidebar */
   --color-sidebar-background: #ffffff;
-  --color-sidebar-foreground: #171717;
+  --color-sidebar-foreground: #1e293b;
   --color-sidebar-primary: #00D9FF;
   --color-sidebar-primary-foreground: #ffffff;
-  --color-sidebar-accent: #f5f5f5;
-  --color-sidebar-accent-foreground: #171717;
-  --color-sidebar-border: #e5e5e5;
+  --color-sidebar-accent: #f1f5f9;
+  --color-sidebar-accent-foreground: #1e293b;
+  --color-sidebar-border: #e2e8f0;
   --color-sidebar-ring: #00D9FF;
-  --radius: 0.5rem;
+  
+  /* Border Radius */
+  --radius: 0.625rem;
 }
 /* 
 @media (prefers-color-scheme: dark) {
