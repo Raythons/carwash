@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+/* Custom color definitions for Tailwind v4 */
+@theme {
+  --color-primary: #00D9FF;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #64748b;
+  --color-secondary-foreground: #ffffff;
+  --color-background: #ffffff;
+  --color-foreground: #171717;
+  --color-border: #e5e5e5;
+  --color-input: #f5f5f5;
+  --color-ring: #00D9FF;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-muted: #e5e5e5;
+  --color-muted-foreground: #737373;
+  --color-accent: #00D9FF;
+  --color-accent-foreground: #ffffff;
+  --color-card: #ffffff;
+  --color-card-foreground: #171717;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #171717;
+  --radius: 0.5rem;
+}

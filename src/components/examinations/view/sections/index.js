@@ -1,0 +1,17 @@
+export { ViewBasicInformationSection } from "./ViewBasicInformationSection";
+export { ViewVisitInformationSection } from "./ViewVisitInformationSection";
+export { ViewClinicalExaminationSection } from "./ViewClinicalExaminationSection";
+export { ViewReproductiveCycleSection } from "./ViewReproductiveCycleSection";
+export { ViewEnvironmentSection } from "./ViewEnvironmentSection";
+export { ViewDietSection } from "./ViewDietSection";
+export { ViewVomitingSection } from "./ViewVomitingSection";
+export { ViewConvulsionsSection } from "./ViewConvulsionsSection";
+export { ViewCoughSection } from "./ViewCoughSection";
+export { ViewSneezingSection } from "./ViewSneezingSection";
+export { ViewUrinationSection } from "./ViewUrinationSection";
+export { ViewDischargesSection } from "./ViewDischargesSection";
+export { ViewOtherConditionsSection } from "./ViewOtherConditionsSection";
+export { ViewPreviousConditionsSection } from "./ViewPreviousConditionsSection";
+export { ViewProtectiveAgentsSection } from "./ViewProtectiveAgentsSection";
+export { ViewDiagnosisSection } from "./ViewDiagnosisSection";
+export { ViewTreatmentSection } from "./ViewTreatmentSection";
