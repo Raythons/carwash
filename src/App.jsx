@@ -8,6 +8,7 @@ import { ClinicProvider } from "./contexts/ClinicContext";
 import { StorageProvider } from "./contexts/StorageContext";
 import { Layout } from "./components/Layout";
 import LoginPage from "./components/auth/LoginPage";
+import RegisterPage from "./components/auth/RegisterPage";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import usePermissions, { PERMISSIONS, ROLES } from "./hooks/usePermissions";
 import { StorageStatistics } from "./pages/clinic/StorageStatistics";
@@ -97,6 +98,8 @@ function App() {
               {/* Public Routes */}
               <Route path="" element={<Home />} />
               <Route path="login" element={<LoginPage />} />
+              <Route path="auth/login" element={<LoginPage />} />
+              <Route path="auth/register" element={<RegisterPage />} />
               <Route path="product/:qrCode" element={<ProductView />} />
               
               {/* Redirect old employee URLs to new format */}

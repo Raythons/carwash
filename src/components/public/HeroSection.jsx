@@ -24,7 +24,7 @@ export function HeroSection() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/hero-carwash.jpeg)',
+          backgroundImage: 'url(/images/our-20services.jpeg)',
         }}
       />
       
