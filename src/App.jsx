@@ -43,6 +43,7 @@ import ProductView from "./pages/public/ProductView";
 import SuperAdminDashboard from "./pages/admin/SuperAdminDashboard";
 import CreateOrganization from "./pages/admin/CreateOrganization";
 import Home from "./pages/public/Home";
+import RegisterPage from "./pages/auth/register";
 
 // Redirect components for old employee URLs
 function EmployeeEditRedirect() {
@@ -97,6 +98,7 @@ function App() {
               {/* Public Routes */}
               <Route path="" element={<Home />} />
               <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
               <Route path="product/:qrCode" element={<ProductView />} />
               
               {/* Redirect old employee URLs to new format */}

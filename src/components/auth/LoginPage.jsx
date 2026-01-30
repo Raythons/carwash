@@ -1,10 +1,13 @@
+'use client';
+
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { Eye, EyeOff, Lock, Mail, LogIn, AlertCircle } from "lucide-react";
-import { BubbleBackground } from "./LoginBackground";
+import BubbleBackground from "../BubbleBackground"; // Import BubbleBackground component
+import { PublicLayout } from "../public/PublicLayout";
 
 const LoginPage = () => {
   const { login } = useAuth(); // Remove loading from useAuth
@@ -88,28 +91,35 @@ const LoginPage = () => {
   // Remove the global loading screen - we'll show loading only on the button
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <BubbleBackground />
+    <PublicLayout>
+      <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/10 to-primary/5">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+            <div className="absolute top-40 right-10 w-72 h-72 bg-secondary/30 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+          </div>
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-md p-4">
           {/* Login Card */}
-          <div className="bg-white/60 dark:bg-zinc-900/70 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 dark:border-white/10 p-8">
+          <div className="bg-background/95 backdrop-blur-md rounded-2xl shadow-2xl border border-border p-8">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="mx-auto w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+              <div className="mx-auto w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mb-4 shadow-lg">
                 <Lock className="h-8 w-8 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-2">
+              <h1 className="text-3xl font-bold text-foreground mb-2">
                 {t("auth.welcome_back")}
               </h1>
-              <p className="text-gray-600 dark:text-zinc-400">{t("auth.system_name")}</p>
+              <p className="text-muted-foreground">{t("auth.system_name")}</p>
             </div>
 
             {/* Error Message */}
             {error && (
-              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 rounded-lg flex items-center gap-3 text-red-700 dark:text-red-400">
+              <div className="mb-6 p-4 bg-destructive/10 border border-destructive/50 rounded-lg flex items-center gap-3 text-destructive">
                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
                 <span className="text-sm">{error}</span>
               </div>
@@ -121,19 +131,19 @@ const LoginPage = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-2"
+                  className="block text-sm font-medium text-foreground mb-2"
                 >
                   {t("auth.email_label")}
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-zinc-500" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 bg-white/90 dark:bg-zinc-800/90 dark:text-white dark:placeholder-zinc-500"
+                    className="w-full pl-10 pr-4 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
                     placeholder={t("auth.placeholder_email")}
                     required
                   />
@@ -144,26 +154,26 @@ const LoginPage = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700 dark:text-zinc-300 mb-2"
+                  className="block text-sm font-medium text-foreground mb-2"
                 >
                   {t("auth.password_label")}
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-zinc-500" />
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className="w-full pl-10 pr-12 py-3 border border-gray-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 bg-white/90 dark:bg-zinc-800/90 dark:text-white dark:placeholder-zinc-500"
+                    className="w-full pl-10 pr-12 py-3 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200 bg-background text-foreground placeholder:text-muted-foreground"
                     placeholder={t("auth.placeholder_password")}
                     required
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-zinc-300 transition-colors"
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {showPassword ? (
                       <EyeOff className="h-5 w-5" />
@@ -179,7 +189,7 @@ const LoginPage = () => {
                 type="button"
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-cyan-600 to-cyan-600 text-white py-3 px-4 rounded-lg hover:from-cyan-700 hover:to-cyan-700 focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gradient-to-r from-primary to-secondary text-primary-foreground py-3 px-4 rounded-lg hover:opacity-90 focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-all duration-200 flex items-center justify-center gap-2 font-medium shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
@@ -334,13 +344,13 @@ const LoginPage = () => {
 
           {/* Footer */}
           <div className="text-center mt-6">
-            <p className="dark:text-white text-black/80 text-sm">
+            <p className="text-muted-foreground text-sm">
               {t("auth.footer_rights")}
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </PublicLayout>
   );
 };
 

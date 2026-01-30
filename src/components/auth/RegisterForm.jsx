@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -213,7 +213,7 @@ export function RegisterForm() {
           </div>
         </div>
 
-        <Link href="/auth/login">
+        <Link to="/login" className="block">
           <Button variant="outline" className="w-full bg-transparent" size="lg">
             {t('auth.register.sign_in')}
           </Button>

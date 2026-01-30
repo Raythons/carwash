@@ -6,3 +6,4 @@ export { PricingSection } from './PricingSection';
 export { ExtrasSection } from './ExtrasSection';
 export { ContactSection } from './ContactSection';
 export { Footer } from './Footer';
+export { PublicLayout } from './PublicLayout';

@@ -36,13 +36,13 @@ export const PricingSection = () => {
                 key={plan.key}
                 className={`relative rounded-2xl transition-all duration-300 ${
                   plan.featured
-                    ? 'md:scale-105 bg-gradient-to-br from-primary to-primary/90 text-primary-foreground shadow-lg'
-                    : 'bg-card border border-border text-foreground hover:border-primary/50'
+                    ? 'md:scale-105 bg-gradient-to-br from-secondary to-secondary/90 text-white shadow-xl ring-2 ring-primary'
+                    : 'bg-card border border-border text-foreground hover:border-primary/50 hover:shadow-lg'
                 }`}
               >
                 {plan.featured && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <span className="bg-accent text-accent-foreground px-4 py-1 rounded-full text-xs sm:text-sm font-bold">
+                    <span className="bg-primary text-primary-foreground px-5 py-2 rounded-full text-sm font-bold shadow-lg">
                       {t('common.popular') || 'Popular'}
                     </span>
                   </div>
