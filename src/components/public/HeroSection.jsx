@@ -20,11 +20,11 @@ export function HeroSection() {
       id="home"
       className={`relative w-full min-h-screen flex items-center justify-center overflow-hidden ${isArabic ? 'rtl' : 'ltr'}`}
     >
-      {/* Background Image */}
+      {/* Background Image - Car Wash */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(/images/our-20services.jpeg)',
+          backgroundImage: `url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/our%20services-9qQiYh7WQp6yy9PPYFlNjmJnJqoA3o.jpeg")`,
         }}
       />
       

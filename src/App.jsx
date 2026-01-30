@@ -44,6 +44,7 @@ import ProductView from "./pages/public/ProductView";
 import SuperAdminDashboard from "./pages/admin/SuperAdminDashboard";
 import CreateOrganization from "./pages/admin/CreateOrganization";
 import Home from "./pages/public/Home";
+import { PublicLayout } from "./components/layouts/PublicLayout";
 
 // Redirect components for old employee URLs
 function EmployeeEditRedirect() {
