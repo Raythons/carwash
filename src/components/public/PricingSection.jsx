@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Check, Sparkles, Crown, Star } from 'lucide-react';
@@ -93,14 +95,14 @@ export const PricingSection = () => {
                 key={plan.key}
                 className={`relative rounded-3xl transition-all duration-500 overflow-hidden group ${
                   plan.featured
-                    ? 'md:scale-105 md:-translate-y-2 bg-secondary text-secondary-foreground shadow-2xl ring-2 ring-primary/30'
+                    ? 'md:scale-105 md:-translate-y-2 bg-gradient-to-br from-slate-800 to-slate-900 text-white shadow-2xl ring-2 ring-primary/40'
                     : 'bg-card border-2 border-border text-foreground hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5'
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.featured && (
                   <div className="absolute top-0 inset-x-0 flex justify-center">
-                    <span className="bg-primary text-white px-6 py-1.5 rounded-b-xl text-xs sm:text-sm font-bold shadow-lg">
+                    <span className="bg-gradient-to-r from-primary to-primary/80 text-white px-6 py-1.5 rounded-b-xl text-xs sm:text-sm font-bold shadow-lg shadow-primary/20">
                       {isArabic ? 'الأكثر شيوعاً' : 'Most Popular'}
                     </span>
                   </div>

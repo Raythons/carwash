@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
+import { Button } from '../ui/Button'
+import { Input } from '../ui/Input'
+import { Checkbox } from '../ui/Checkbox'
 import { Eye, EyeOff, Mail, Lock, User, Phone, Shield, Sparkles } from 'lucide-react'
 
 export default function RegisterPage() {
