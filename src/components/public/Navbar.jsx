@@ -2,16 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Menu, Globe, Home, Info, Settings, Package, Sparkles, Phone } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetClose,
-} from '@/components/ui/sheet';
 
 export const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -33,20 +26,20 @@ export const Navbar = () => {
   };
 
   const navItems = [
-    { label: t('public.navbar.home'), href: '#home', icon: Home },
-    { label: t('public.navbar.about'), href: '#about', icon: Info },
-    { label: t('public.navbar.services'), href: '#services', icon: Settings },
-    { label: t('public.navbar.plans'), href: '#plans', icon: Package },
-    { label: t('public.navbar.extras'), href: '#extras', icon: Sparkles },
-    { label: t('public.navbar.contact'), href: '#contact', icon: Phone },
+    { label: t('public.navbar.home'), href: '#home' },
+    { label: t('public.navbar.about'), href: '#about' },
+    { label: t('public.navbar.services'), href: '#services' },
+    { label: t('public.navbar.plans'), href: '#plans' },
+    { label: t('public.navbar.extras'), href: '#extras' },
+    { label: t('public.navbar.contact'), href: '#contact' },
   ];
 
   return (
     <nav 
-      className={`fixed w-full z-50 transition-all duration-500 ${isArabic ? 'rtl' : 'ltr'} ${
+      className={`fixed w-full z-50 transition-all duration-300 ${isArabic ? 'rtl' : 'ltr'} ${
         isScrolled 
           ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-sm' 
-          : 'bg-primary/20 backdrop-blur-sm'
+          : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,10 +47,10 @@ export const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <a href="#home" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-lg">A</span>
               </div>
-              <h1 className={`text-xl sm:text-2xl font-bold transition-colors duration-300 ${isScrolled ? 'text-foreground' : 'text-white'}`}>
+              <h1 className={`text-xl sm:text-2xl font-bold ${isScrolled ? 'text-foreground' : 'text-white'}`}>
                 AutoCare
               </h1>
             </a>
@@ -82,17 +75,17 @@ export const Navbar = () => {
 
           {/* Right Side - Actions */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* Language Toggle - Desktop Only */}
+            {/* Language Toggle */}
             <button
               onClick={toggleLanguage}
-              className={`hidden sm:flex px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-1 ${
                 isScrolled 
                   ? 'bg-secondary text-secondary-foreground hover:bg-secondary/80' 
                   : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
               }`}
             >
-              <Globe className="w-4 h-4" />
               {isArabic ? 'EN' : 'ع'}
+              <ChevronDown className="w-3 h-3" />
             </button>
 
             {/* Login Button - Desktop */}
@@ -115,7 +108,7 @@ export const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsOpen(true)}
+              onClick={() => setIsOpen(!isOpen)}
               className={`lg:hidden p-2 rounded-lg transition-colors ${
                 isScrolled 
                   ? 'hover:bg-muted text-foreground' 
@@ -123,75 +116,49 @@ export const Navbar = () => {
               }`}
               aria-label="Toggle menu"
             >
-              <Menu size={24} />
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu Sheet */}
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent 
-          side={isArabic ? 'right' : 'left'} 
-          className="w-[300px] sm:w-[350px] bg-secondary text-secondary-foreground border-secondary"
+        {/* Mobile Menu */}
+        <div 
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          }`}
         >
-          <SheetHeader className="border-b border-white/10 pb-6 mb-6">
-            <SheetTitle className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/70 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
-              <span className="text-white text-xl font-bold">AutoCare</span>
-            </SheetTitle>
-          </SheetHeader>
-          
-          {/* Navigation Links */}
-          <nav className="flex flex-col gap-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <SheetClose asChild key={item.href}>
-                  <a
-                    href={item.href}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
-                  >
-                    <Icon className="w-5 h-5 text-primary" />
-                    {item.label}
-                  </a>
-                </SheetClose>
-              );
-            })}
-          </nav>
-
-          {/* Language Toggle in Mobile */}
-          <div className="mt-6 pt-6 border-t border-white/10">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 font-medium"
-            >
-              <Globe className="w-5 h-5 text-primary" />
-              {isArabic ? 'English' : 'العربية'}
-            </button>
-          </div>
-
-          {/* Auth Buttons */}
-          <div className="mt-6 pt-6 border-t border-white/10 space-y-3">
-            <SheetClose asChild>
-              <Link to="/auth/login" className="block">
-                <Button variant="outline" className="w-full bg-white/10 border-white/20 text-white hover:bg-white/20">
+          <div className={`pb-4 space-y-1 ${isScrolled ? '' : 'bg-secondary/95 backdrop-blur-md rounded-xl mt-2 p-4'}`}>
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
+                  isScrolled 
+                    ? 'text-foreground hover:bg-muted' 
+                    : 'text-white hover:bg-white/10'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+            
+            {/* Mobile Auth Buttons */}
+            <div className="pt-4 space-y-2 border-t border-border/20 mt-4">
+              <Link to="/auth/login" className="block" onClick={() => setIsOpen(false)}>
+                <Button variant="outline" className="w-full">
                   {t('public.navbar.login')}
                 </Button>
               </Link>
-            </SheetClose>
-            <SheetClose asChild>
-              <Link to="/auth/register" className="block">
+              <Link to="/auth/register" className="block" onClick={() => setIsOpen(false)}>
                 <Button className="w-full">
                   {t('public.navbar.register')}
                 </Button>
               </Link>
-            </SheetClose>
+            </div>
           </div>
-        </SheetContent>
-      </Sheet>
+        </div>
+      </div>
     </nav>
   );
 };

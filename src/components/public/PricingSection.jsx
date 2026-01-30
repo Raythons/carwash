@@ -93,14 +93,14 @@ export const PricingSection = () => {
                 key={plan.key}
                 className={`relative rounded-3xl transition-all duration-500 overflow-hidden group ${
                   plan.featured
-                    ? 'md:scale-105 md:-translate-y-2 bg-secondary text-secondary-foreground shadow-2xl ring-2 ring-primary/30'
+                    ? 'md:scale-105 md:-translate-y-2 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground shadow-2xl shadow-primary/20 ring-2 ring-primary/20'
                     : 'bg-card border-2 border-border text-foreground hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5'
                 }`}
               >
                 {/* Popular Badge */}
                 {plan.featured && (
                   <div className="absolute top-0 inset-x-0 flex justify-center">
-                    <span className="bg-primary text-white px-6 py-1.5 rounded-b-xl text-xs sm:text-sm font-bold shadow-lg">
+                    <span className="bg-accent text-accent-foreground px-6 py-1.5 rounded-b-xl text-xs sm:text-sm font-bold shadow-lg">
                       {isArabic ? 'الأكثر شيوعاً' : 'Most Popular'}
                     </span>
                   </div>
@@ -110,10 +110,10 @@ export const PricingSection = () => {
                 <div className="p-6 sm:p-8 lg:p-10">
                   {/* Plan Icon & Name */}
                   <div className={`flex items-center gap-3 mb-6 ${plan.featured ? 'mt-4' : ''}`}>
-                    <div className={`p-2.5 rounded-xl ${plan.featured ? 'bg-primary/20' : 'bg-primary/10'}`}>
-                      <Icon className={`w-6 h-6 ${plan.featured ? 'text-primary' : 'text-primary'}`} />
+                    <div className={`p-2.5 rounded-xl ${plan.featured ? 'bg-white/20' : 'bg-primary/10'}`}>
+                      <Icon className={`w-6 h-6 ${plan.featured ? 'text-white' : 'text-primary'}`} />
                     </div>
-                    <h3 className={`text-xl sm:text-2xl font-bold break-words ${plan.featured ? 'text-white' : ''}`}>
+                    <h3 className="text-xl sm:text-2xl font-bold break-words">
                       {planData.name}
                     </h3>
                   </div>
@@ -121,10 +121,10 @@ export const PricingSection = () => {
                   {/* Price */}
                   <div className="mb-8">
                     <div className="flex items-baseline gap-1 flex-wrap">
-                      <span className={`text-4xl sm:text-5xl font-extrabold tracking-tight ${plan.featured ? 'text-primary' : ''}`}>
+                      <span className="text-4xl sm:text-5xl font-extrabold tracking-tight">
                         {planData.price}
                       </span>
-                      <span className={`text-sm sm:text-base font-medium ${plan.featured ? 'text-white/70' : 'text-muted-foreground'}`}>
+                      <span className={`text-sm sm:text-base font-medium ${plan.featured ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>
                         {planData.period}
                       </span>
                     </div>
@@ -133,11 +133,11 @@ export const PricingSection = () => {
                   {/* CTA Button */}
                   <Link to="/auth/register" className="block">
                     <Button
-                      variant={plan.featured ? 'default' : 'default'}
+                      variant={plan.featured ? 'secondary' : 'default'}
                       size="lg"
                       className={`w-full mb-8 text-base font-semibold transition-all duration-300 ${
                         plan.featured 
-                          ? 'bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/30' 
+                          ? 'bg-white text-primary hover:bg-white/90 shadow-lg' 
                           : 'hover:scale-[1.02]'
                       }`}
                     >
@@ -147,15 +147,15 @@ export const PricingSection = () => {
 
                   {/* Features List */}
                   <div className="space-y-4">
-                    <p className={`text-sm font-medium ${plan.featured ? 'text-white/70' : 'text-muted-foreground'}`}>
+                    <p className={`text-sm font-medium ${plan.featured ? 'text-primary-foreground/80' : 'text-muted-foreground'}`}>
                       {isArabic ? 'يشمل:' : 'Includes:'}
                     </p>
                     {planData.features.map((feature, index) => (
                       <div key={index} className="flex items-start gap-3">
-                        <div className={`flex-shrink-0 mt-0.5 p-1 rounded-full ${plan.featured ? 'bg-primary/20' : 'bg-primary/10'}`}>
-                          <Check className={`w-3.5 h-3.5 ${plan.featured ? 'text-primary' : 'text-primary'}`} />
+                        <div className={`flex-shrink-0 mt-0.5 p-1 rounded-full ${plan.featured ? 'bg-white/20' : 'bg-primary/10'}`}>
+                          <Check className={`w-3.5 h-3.5 ${plan.featured ? 'text-white' : 'text-primary'}`} />
                         </div>
-                        <span className={`text-sm sm:text-base leading-relaxed break-words ${plan.featured ? 'text-white/80' : 'text-muted-foreground'}`}>
+                        <span className={`text-sm sm:text-base leading-relaxed break-words ${plan.featured ? 'text-primary-foreground/90' : 'text-muted-foreground'}`}>
                           {feature}
                         </span>
                       </div>
@@ -165,7 +165,7 @@ export const PricingSection = () => {
 
                 {/* Decorative Elements */}
                 {plan.featured && (
-                  <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl"></div>
+                  <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/5 rounded-full blur-3xl"></div>
                 )}
               </div>
             );
